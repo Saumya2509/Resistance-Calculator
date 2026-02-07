@@ -1,0 +1,748 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --wood-dark: #3e2723;
+  --wood-medium: #5d4037;
+  --wood-light: #8d6e63;
+  --gold: #d4af37;
+  --copper: #b87333;
+  --brass: #b5a642;
+  --ivory: #fff8e1;
+  --cream: #fff3e0;
+  --deep-red: #8b0000;
+  --vintage-text: #2c1e13;
+  --glow: rgba(212, 175, 55, 0.3);
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(94, 53, 35, 0.8) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(184, 115, 51, 0.6) 0%, transparent 50%),
+    linear-gradient(135deg, #2c1e13 0%, #1a1008 100%);
+  color: var(--vintage-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(184, 115, 51, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Vintage paper texture effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(#000 1px, transparent 1px),
+    radial-gradient(#000 1px, transparent 1px);
+  background-size: 60px 60px, 60px 60px;
+  background-position: 0 0, 30px 30px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* App container */
+.app {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  perspective: 1000px;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: slideIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) rotateX(-10deg) scale(0.9);
+  }
+  50% {
+    transform: translateY(-10px) rotateX(5deg) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg) scale(1);
+  }
+}
+
+/* Header styles */
+h1 {
+  font-size: 3.5rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 
+    2px 2px 0px var(--copper),
+    4px 4px 0px var(--wood-dark);
+  position: relative;
+  animation: glowPulse 4s ease-in-out infinite;
+  border-bottom: 3px solid var(--gold);
+  padding-bottom: 10px;
+}
+
+@keyframes glowPulse {
+  0%, 100% { text-shadow: 2px 2px 0px var(--copper), 4px 4px 0px var(--wood-dark), 0 0 20px var(--glow); }
+  50% { text-shadow: 2px 2px 0px var(--copper), 4px 4px 0px var(--wood-dark), 0 0 40px var(--glow); }
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--cream);
+  margin-bottom: 2rem;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  padding: 10px 20px;
+  background: rgba(255, 248, 225, 0.1);
+  backdrop-filter: blur(5px);
+  animation: subtitleFloat 3s ease-in-out infinite;
+}
+
+@keyframes subtitleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Calculator card - Vintage Wooden Box Style */
+.calculator-card {
+  background: linear-gradient(135deg, var(--ivory) 0%, var(--cream) 100%);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  border: 3px solid var(--wood-dark);
+  position: relative;
+  animation: woodTexture 0s;
+  transform: rotateY(0deg);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.calculator-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(45deg, transparent 49%, rgba(0,0,0,0.05) 50%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, rgba(0,0,0,0.05) 50%, transparent 51%);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  pointer-events: none;
+  border-radius: 16px;
+}
+
+.calculator-card:hover {
+  transform: translateY(-5px) rotateY(2deg);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+@keyframes woodTexture {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+/* Decorative corner elements */
+.calculator-card::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 2px solid rgba(184, 115, 51, 0.3);
+  border-radius: 20px;
+  pointer-events: none;
+  animation: borderGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes borderGlow {
+  0% { border-color: rgba(184, 115, 51, 0.1); }
+  100% { border-color: rgba(184, 115, 51, 0.5); }
+}
+
+/* Bands container */
+.bands-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.band-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+/* Vintage label styling */
+label {
+  font-weight: 700;
+  color: var(--wood-dark);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Georgia', serif;
+  position: relative;
+  padding-left: 15px;
+}
+
+label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--gold);
+}
+
+/* Vintage select styling */
+select {
+  padding: 1.2rem 1.5rem;
+  border: 3px solid var(--wood-medium);
+  border-radius: 8px;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+  color: var(--wood-dark);
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.1),
+    0 4px 0 var(--wood-dark),
+    0 6px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+select:hover {
+  border-color: var(--copper);
+  transform: translateY(-2px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.1),
+    0 6px 0 var(--wood-dark),
+    0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+select:focus {
+  border-color: var(--gold);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.1),
+    0 4px 0 var(--wood-dark),
+    0 6px 10px rgba(0, 0, 0, 0.2),
+    0 0 0 4px rgba(212, 175, 55, 0.2);
+  transform: translateY(-3px) scale(1.02);
+  animation: focusPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes focusPulse {
+  0%, 100% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 5px rgba(0, 0, 0, 0.1), 0 4px 0 var(--wood-dark), 0 6px 10px rgba(0, 0, 0, 0.2), 0 0 0 4px rgba(212, 175, 55, 0.1); }
+  50% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 5px rgba(0, 0, 0, 0.1), 0 4px 0 var(--wood-dark), 0 6px 10px rgba(0, 0, 0, 0.2), 0 0 0 4px rgba(212, 175, 55, 0.4); }
+}
+
+/* Select arrow styling */
+select::-ms-expand {
+  display: none;
+}
+
+select::after {
+  content: '▼';
+  font-size: 0.8rem;
+  color: var(--gold);
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+select:hover::after {
+  color: var(--copper);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Decorative band section background */
+.band-section::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(135deg, rgba(184, 115, 51, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+  border-radius: 12px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.band-section:hover::before {
+  opacity: 1;
+}
+
+/* Calculate button - Vintage Brass Style */
+.calculate-btn {
+  background: linear-gradient(135deg, var(--brass) 0%, var(--gold) 100%);
+  color: var(--wood-dark);
+  border: 3px solid var(--copper);
+  padding: 1.2rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: 100%;
+  margin-top: 1rem;
+  font-family: 'Georgia', serif;
+  box-shadow: 
+    0 6px 0 var(--copper),
+    0 10px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: buttonGlow 4s ease-in-out infinite;
+}
+
+.calculate-btn::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: radial-gradient(circle, rgba(181, 166, 66, 0.3) 0%, transparent 70%);
+  border-radius: 12px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.calculate-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--gold);
+  box-shadow: 
+    0 8px 0 var(--copper),
+    0 12px 25px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+  animation-play-state: paused;
+}
+
+.calculate-btn:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 
+    0 2px 0 var(--copper),
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.calculate-btn:hover::before {
+  opacity: 1;
+}
+
+@keyframes buttonGlow {
+  0%, 100% { box-shadow: 0 6px 0 var(--copper), 0 10px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -2px 5px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(181, 166, 66, 0.5); }
+  50% { box-shadow: 0 6px 0 var(--copper), 0 10px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -2px 5px rgba(0, 0, 0, 0.2), 0 0 0 4px rgba(181, 166, 66, 0.3); }
+}
+
+/* Error message - Vintage parchment style */
+.error-message {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  color: var(--deep-red);
+  padding: 1.2rem;
+  border-radius: 8px;
+  border: 2px solid var(--deep-red);
+  margin-top: 1rem;
+  font-weight: 700;
+  font-family: 'Georgia', serif;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    0 4px 0 var(--wood-dark),
+    0 6px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: errorShake 0.5s ease-in-out;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.error-message::before {
+  content: '⚠️';
+  font-size: 1.5rem;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: var(--deep-red);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 0 var(--wood-dark);
+}
+
+/* Result container - Vintage parchment style */
+.result-container {
+  background: linear-gradient(135deg, var(--ivory) 0%, var(--cream) 100%);
+  border-radius: 12px;
+  padding: 2.5rem;
+  border: 2px solid var(--wood-light);
+  margin-top: 1rem;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.1),
+    0 6px 0 var(--wood-dark),
+    0 10px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: resultGlow 3s ease-in-out infinite;
+}
+
+.result-container::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(184, 115, 51, 0.05) 100%);
+  border-radius: 16px;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+@keyframes resultGlow {
+  0%, 100% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 5px rgba(0, 0, 0, 0.1), 0 6px 0 var(--wood-dark), 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(212, 175, 55, 0.2); }
+  50% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 5px rgba(0, 0, 0, 0.1), 0 6px 0 var(--wood-dark), 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 0 4px rgba(212, 175, 55, 0.3); }
+}
+
+.result-container h2 {
+  font-size: 1.8rem;
+  color: var(--wood-dark);
+  margin-bottom: 1.5rem;
+  font-family: 'Georgia', serif;
+  text-align: center;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 15px;
+}
+
+.result-value {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--wood-dark);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(135deg, var(--gold), var(--copper));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 0 var(--wood-dark);
+  animation: valuePulse 2s ease-in-out infinite;
+}
+
+@keyframes valuePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.result-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.result-details p {
+  background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+  padding: 1.2rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--gold);
+  font-weight: 700;
+  color: var(--wood-dark);
+  font-family: 'Georgia', serif;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    0 2px 0 var(--wood-dark),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.result-details p:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    0 4px 0 var(--wood-dark),
+    0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Info box - Vintage reference book style */
+.info-box {
+  background: linear-gradient(135deg, var(--ivory) 0%, var(--cream) 100%);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.1),
+    0 4px 0 var(--wood-dark),
+    0 6px 10px rgba(0, 0, 0, 0.2);
+  max-width: 680px;
+  margin: 0 auto;
+  border: 2px solid var(--wood-light);
+  position: relative;
+  animation: infoGlow 5s ease-in-out infinite;
+}
+
+.info-box::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(184, 115, 51, 0.03) 100%);
+  border-radius: 20px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+@keyframes infoGlow {
+  0%, 100% { box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 5px rgba(0, 0, 0, 0.1), 0 4px 0 var(--wood-dark), 0 6px 10px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(212, 175, 55, 0.1); }
+  50% { box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 5px rgba(0, 0, 0, 0.1), 0 4px 0 var(--wood-dark), 0 6px 10px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(212, 175, 55, 0.2); }
+}
+
+/* Center main text and align cards */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.info-box h3 {
+  color: var(--wood-dark);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-family: 'Georgia', serif;
+  text-align: center;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 15px;
+  position: relative;
+}
+
+.info-box h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background: var(--gold);
+  box-shadow: 0 0 10px var(--gold);
+}
+
+.info-box p {
+  color: var(--vintage-text);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  font-family: 'Georgia', serif;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border-left: 3px solid rgba(212, 175, 55, 0.3);
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.info-box p:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateX(5px);
+  border-left-color: var(--gold);
+}
+
+.info-box strong {
+  color: var(--wood-dark);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--gold), var(--copper));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Decorative page curl effect */
+.info-box::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, rgba(184, 115, 51, 0.2), transparent);
+  border-radius: 0 0 0 50%;
+  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0.3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .bands-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .result-value {
+    font-size: 2rem;
+  }
+  
+  .result-container {
+    padding: 1.5rem;
+  }
+  
+  .info-box {
+    padding: 1.5rem;
+  }
+  
+  .calculate-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  .result-value {
+    font-size: 1.75rem;
+  }
+  
+  .band-section {
+    gap: 0.25rem;
+  }
+  
+  select {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  label {
+    font-size: 0.8rem;
+  }
+}
+
+/* Animation for smooth transitions */
+.calculator-card,
+.info-box {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
